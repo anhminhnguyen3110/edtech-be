@@ -1,0 +1,149 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: edtech-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "20m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
+
+spec:
+  tls:
+  - hosts:
+    - api.edtech-assistant.sbs
+    - quiz.edtech-assistant.sbs
+    - chat-api.edtech-assistant.sbs
+    - assignment-api.edtech-assistant.sbs
+    - background-job-api.edtech-assistant.sbs
+    - quiz-api.edtech-assistant.sbs
+    - prometheus.edtech-assistant.sbs
+    - rabbitmq-management.edtech-assistant.sbs
+    - grafana.edtech-assistant.sbs
+    - redis-insight.edtech-assistant.sbs
+    secretName: tls-cert
+  rules:
+  - host: redis-insight.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: redis-service
+            port:
+              number: 8001
+
+  - host: grafana.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-service
+            port:
+              number: 3000
+
+  - host: api.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 80
+      - path: /notifications
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8180
+      - path: /socket.io
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8180
+
+  - host: quiz.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: quiz-service
+            port:
+              number: 8282
+  
+  - host: chat-api.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chat-service
+            port:
+              number: 8184
+  
+  - host: assignment-api.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: assignment-service
+            port:
+              number: 8181
+
+  - host: background-job-api.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: background-job-service
+            port:
+              number: 8183
+  
+  - host: quiz-api.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: quiz-service
+            port:
+              number: 8182
+
+  - host: rabbitmq-management.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rabbitmq-service
+            port:
+              number: 15672
+
+  - host: prometheus.edtech-assistant.sbs
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-service
+            port:
+              number: 9090

@@ -1,0 +1,6 @@
+start cmd /k "yarn run start:dev"
+start cmd /k "yarn run start:dev quiz"
+start cmd /k "yarn run start:dev assignment"
+start cmd /k "yarn run start:dev background-job"
+start cmd /k "yarn run start:dev chat"
+start cmd /k "yarn run start:dev common"

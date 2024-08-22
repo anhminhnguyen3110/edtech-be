@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quiz
+  template:
+    metadata:
+      labels:
+        app: quiz
+    spec:
+      containers:
+      - name: quiz
+        image: minhanh3110/edtech-assistant-quiz
+        ports:
+        - containerPort: 8082
+        - containerPort: 8182
+        - containerPort: 8282
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: QUIZ_PORT
+            value: "8082"
+          - name: QUIZ_HTTP_PORT
+            value: "8182"
+          - name: QUIZ_HOST
+            value: "quiz-service"
+          - name: QUIZ_SOCKET_PORT
+            value: "8282"
+          - name: REDIS_HOST
+            value: "redis-service"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: RABBIT_MQ_HOST
+            value: "rabbitmq-service"
+          - name: RABBIT_MQ_PORT
+            value: "5672"
+          - name: CLIENT_URL
+            value: "https://edtech-assistant.sbs"

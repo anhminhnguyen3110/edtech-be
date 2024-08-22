@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assignment-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: assignment
+  template:
+    metadata:
+      labels:
+        app: assignment
+    spec:
+      containers:
+      - name: assignment
+        image: minhanh3110/edtech-assistant-assignment
+        ports:
+        - containerPort: 8081
+        - containerPort: 8181
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: ASSIGNMENT_HOST
+            value: "assignment-service"
+          - name: ASSIGNMENT_PORT
+            value: "8081"
+          - name: ASSIGNMENT_HTTP_PORT
+            value: "8181"
+          - name: REDIS_HOST
+            value: "redis-service"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: RABBIT_MQ_HOST
+            value: "rabbitmq-service"
+          - name: RABBIT_MQ_PORT
+            value: "5672"
+          - name: CLIENT_URL
+            value: "https://edtech-assistant.sbs"

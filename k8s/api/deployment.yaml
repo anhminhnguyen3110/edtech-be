@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: minhanh3110/edtech-assistant-api
+        ports:
+        - containerPort: 8080
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: API_PORT
+            value: "8080"
+          - name: API_HOST
+            value: "api.edtech-assistant.sbs"
+          - name: API_SOCKET_PORT
+            value: "8180"
+          - name: REDIS_HOST
+            value: "redis-service"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: RABBIT_MQ_HOST
+            value: "rabbitmq-service"
+          - name: RABBIT_MQ_PORT
+            value: "5672"
+          - name: CLIENT_URL
+            value: "https://edtech-assistant.sbs"

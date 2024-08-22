@@ -1,0 +1,119 @@
+{
+	"@odata.context": "https://edtech-assistant.search.windows.net/$metadata#indexes/$entity",
+	"@odata.etag": "\"0x8DCAC7CC47C54CD\"",
+	"name": "user-document-knowledge-base",
+	"defaultScoringProfile": null,
+	"fields": [
+		{
+			"name": "id",
+			"type": "Edm.String",
+			"searchable": false,
+			"filterable": true,
+			"retrievable": true,
+			"stored": true,
+			"sortable": false,
+			"facetable": false,
+			"key": true,
+			"indexAnalyzer": null,
+			"searchAnalyzer": null,
+			"analyzer": null,
+			"normalizer": null,
+			"dimensions": null,
+			"vectorSearchProfile": null,
+			"vectorEncoding": null,
+			"synonymMaps": []
+		},
+		{
+			"name": "document",
+			"type": "Edm.String",
+			"searchable": true,
+			"filterable": false,
+			"retrievable": true,
+			"stored": true,
+			"sortable": false,
+			"facetable": false,
+			"key": false,
+			"indexAnalyzer": null,
+			"searchAnalyzer": null,
+			"analyzer": "standard.lucene",
+			"normalizer": null,
+			"dimensions": null,
+			"vectorSearchProfile": null,
+			"vectorEncoding": null,
+			"synonymMaps": []
+		},
+		{
+			"name": "title",
+			"type": "Edm.String",
+			"searchable": true,
+			"filterable": false,
+			"retrievable": true,
+			"stored": true,
+			"sortable": false,
+			"facetable": false,
+			"key": false,
+			"indexAnalyzer": null,
+			"searchAnalyzer": null,
+			"analyzer": "standard.lucene",
+			"normalizer": null,
+			"dimensions": null,
+			"vectorSearchProfile": null,
+			"vectorEncoding": null,
+			"synonymMaps": []
+		},
+		{
+			"name": "chat_topic_id",
+			"type": "Edm.String",
+			"searchable": false,
+			"filterable": true,
+			"retrievable": true,
+			"stored": true,
+			"sortable": false,
+			"facetable": false,
+			"key": false,
+			"indexAnalyzer": null,
+			"searchAnalyzer": null,
+			"analyzer": null,
+			"normalizer": null,
+			"dimensions": null,
+			"vectorSearchProfile": null,
+			"vectorEncoding": null,
+			"synonymMaps": []
+		}
+	],
+	"scoringProfiles": [],
+	"corsOptions": null,
+	"suggesters": [],
+	"analyzers": [],
+	"normalizers": [],
+	"tokenizers": [],
+	"tokenFilters": [],
+	"charFilters": [],
+	"encryptionKey": null,
+	"similarity": {
+		"@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+		"k1": null,
+		"b": null
+	},
+	"semantic": {
+		"defaultConfiguration": null,
+		"configurations": [
+			{
+				"name": "search_on_document",
+				"prioritizedFields": {
+					"titleField": null,
+					"prioritizedContentFields": [
+						{
+							"fieldName": "document"
+						},
+						{
+							"fieldName": "title"
+						}
+					],
+					"prioritizedKeywordsFields": []
+				}
+			}
+		]
+	},
+	"vectorSearch": null
+}

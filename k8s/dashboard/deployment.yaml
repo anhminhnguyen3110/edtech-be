@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      serviceAccountName: admin-user
+      containers:
+      - name: kubernetes-dashboard
+        image: 'kubernetesui/dashboard:v2.0.3'
+        args:
+        - '--namespace=kubernetes-dashboard'
+        - '--insecure-port=5443'

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: background-job-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: background-job
+  template:
+    metadata:
+      labels:
+        app: background-job
+    spec:
+      containers:
+      - name: background-job
+        image: minhanh3110/edtech-assistant-background-job
+        ports:
+        - containerPort: 8083
+        - containerPort: 8183
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: BACKGROUND_JOB_HOST
+            value: "background-job-service"
+          - name: BACKGROUND_JOB_PORT
+            value: "8083"
+          - name: BACKGROUND_JOB_HTTP_PORT
+            value: "8183"
+          - name: REDIS_HOST
+            value: "redis-service"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: RABBIT_MQ_HOST
+            value: "rabbitmq-service"
+          - name: RABBIT_MQ_PORT
+            value: "5672"
+          - name: CLIENT_URL
+            value: "https://edtech-assistant.sbs"

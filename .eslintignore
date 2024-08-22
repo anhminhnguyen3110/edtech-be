@@ -1,0 +1,7 @@
+**/node_modules/*
+**/dist/*
+**/terraform/*
+**/mail/templates/*
+**/sqlscript/*
+**/vector-db-azure/*
+**/.dockerignore

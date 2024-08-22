@@ -1,0 +1,6 @@
+Start-Process powershell -ArgumentList "yarn run start:dev"
+Start-Process powershell -ArgumentList "yarn run start:dev quiz"
+Start-Process powershell -ArgumentList "yarn run start:dev assignment"
+Start-Process powershell -ArgumentList "yarn run start:dev background-job"
+Start-Process powershell -ArgumentList "yarn run start:dev chat"
+Start-Process powershell -ArgumentList "yarn run start:dev common"

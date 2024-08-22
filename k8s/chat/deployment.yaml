@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat
+  template:
+    metadata:
+      labels:
+        app: chat
+    spec:
+      containers:
+      - name: chat
+        image: minhanh3110/edtech-assistant-chat
+        ports:
+        - containerPort: 8084
+        - containerPort: 8184
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: CHAT_HOST
+            value: "chat-service"
+          - name: CHAT_PORT
+            value: "8084"
+          - name: CHAT_HTTP_PORT
+            value: "8184"
+          - name: REDIS_HOST
+            value: "redis-service"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: RABBIT_MQ_HOST
+            value: "rabbitmq-service"
+          - name: RABBIT_MQ_PORT
+            value: "5672"
+          - name: CLIENT_URL
+            value: "https://edtech-assistant.sbs"

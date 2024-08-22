@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'nestjs-service-api'
+    scrape_interval: 15s
+    metrics_path: /api/v1/metrics
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['api.edtech-assistant.sbs:8080']
+  - job_name: 'nestjs-service-assignment'
+    scrape_interval: 15s
+    metrics_path: /metrics
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['assignment.edtech-assistant.sbs:8081']
+  - job_name: 'nestjs-service-quiz'
+    scrape_interval: 15s
+    metrics_path: /metrics
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['quiz.edtech-assistant.sbs:8082']
+  - job_name: 'nestjs-service-background-job'
+    scrape_interval: 15s
+    metrics_path: /metrics
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['background.edtech-assistant.sbs:8083']
+  - job_name: 'nestjs-service-chat'
+    scrape_interval: 15s
+    metrics_path: /metrics
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['chat.edtech-assistant.sbs:8084']

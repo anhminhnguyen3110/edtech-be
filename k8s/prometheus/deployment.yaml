@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: prom/prometheus
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/prometheus/
+      volumes:
+      - name: config-volume
+        configMap:
+          name: prometheus-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+
+    scrape_configs:
+      - job_name: 'nestjs-service-api'
+        scrape_interval: 15s
+        metrics_path: /api/v1/metrics
+        scrape_timeout: 10s
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true
+        static_configs:
+          - targets: ['api.edtech-assistant.sbs']
+      - job_name: 'nestjs-service-assignment'
+        scrape_interval: 15s
+        metrics_path: /metrics
+        scrape_timeout: 10s
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true        
+        static_configs:
+          - targets: ['assignment-api.edtech-assistant.sbs']
+      - job_name: 'nestjs-service-quiz'
+        scrape_interval: 15s
+        metrics_path: /metrics
+        scrape_timeout: 10s
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true        
+        static_configs:
+          - targets: ['quiz-api.edtech-assistant.sbs']
+      - job_name: 'nestjs-service-background-job'
+        scrape_interval: 15s
+        metrics_path: /metrics
+        scrape_timeout: 10s
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true        
+        static_configs:
+          - targets: ['background-job-api.edtech-assistant.sbs']
+      - job_name: 'nestjs-service-chat'
+        scrape_interval: 15s
+        metrics_path: /metrics
+        scrape_timeout: 10s
+        scheme: https
+        tls_config:
+          insecure_skip_verify: true        
+        static_configs:
+          - targets: ['chat-api.edtech-assistant.sbs']
+      - job_name: 'prometheus'
+        scrape_interval: 15s
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['localhost:9090']

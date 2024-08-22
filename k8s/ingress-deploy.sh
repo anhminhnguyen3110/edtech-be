@@ -1,0 +1,1 @@
+kubectl apply -f ingress/ingress.yaml -n edtech-assistant-namespace
