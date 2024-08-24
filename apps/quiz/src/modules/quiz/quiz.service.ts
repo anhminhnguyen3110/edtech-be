@@ -516,7 +516,7 @@ export class QuizService {
         }
 
         const createNotificationRequestDto: CreateNotificationRequestDto = {
-            message: `Quiz generated successfully with class assignment id: ${generateQuizRequestDto.classAssignmentId} and quiz name: ${generateQuizRequestDto.quiz.name}`,
+            message: `Quiz generated successfully quiz name: ${generateQuizRequestDto.quiz.name}`,
             eventType: ENotificationEventType.GENERATE_QUIZ_SUCCESS,
             classAssignmentId: generateQuizRequestDto.classAssignmentId
                 ? generateQuizRequestDto.classAssignmentId
