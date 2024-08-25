@@ -42,8 +42,8 @@ spec:
             value: "https://edtech-assistant.sbs"
         resources:
           requests:
-            memory: "1638Mi"  # 1.6Gi
-            cpu: "1600m"      # 1.6 CPUs
+            memory: "3276Mi"  # 3.2Gi
+            cpu: "6400m"      # 6.4 CPUs
           limits:
-            memory: "2048Mi"  # 2Gi (100% of node)
-            cpu: "2000m"      # 2 CPUs (100% of node)
+            memory: "4096Mi"  # 4Gi (100% of node)
+            cpu: "8000m"      # 8 CPUs (100% of node)
