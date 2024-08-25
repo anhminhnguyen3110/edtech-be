@@ -54,7 +54,16 @@ async function bootstrap() {
     await app.startAllMicroservices();
 
     const redisIoAdapter = new RedisIoAdapter(app);
-    await redisIoAdapter.connectToRedis();
+    await redisIoAdapter.connectToRedis(
+        `redis://${configService.get<string>(ECommonConfig.REDIS_HOST)}:${configService.get<string>(
+            ECommonConfig.REDIS_PORT,
+        )}`,
+    );
+
+    if (redisIoAdapter.isConnected) {
+        app.useWebSocketAdapter(redisIoAdapter);
+    }
+
     app.useWebSocketAdapter(redisIoAdapter);
 
     app.get(ELoggerService.LOGGER_ADAPTER).debug(

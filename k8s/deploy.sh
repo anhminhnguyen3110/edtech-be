@@ -15,7 +15,7 @@ done
 
 # Wait for 1 minute before deploying the next set of services
 echo "Waiting for 1 minute before deploying the next set of services..."
-sleep 120
+sleep 60
 
 # List of directories that require waiting between deployments
 wait_dirs=("api" "assignment" "background-job" "chat" "quiz")
@@ -38,3 +38,14 @@ kubectl apply -f dashboard/service.yaml
 # Verify deployments
 kubectl get pods -n edtech-assistant-namespace
 kubectl get services -n edtech-assistant-namespace
+
+# Apply the Horizontal Pod Autoscalers (HPAs)
+hpa_dir="hpas"
+hpa_files=("api" "assignment" "background-job" "chat" "quiz" "rabbitmq" "redis")
+for hpa_file in "${hpa_files[@]}"; do
+  kubectl apply -f $hpa_dir/$hpa_file.yaml -n edtech-assistant-namespace
+done
+
+# Final check to ensure everything is running as expected
+kubectl get hpa -n edtech-assistant-namespace
+kubectl get deployments -n edtech-assistant-namespace

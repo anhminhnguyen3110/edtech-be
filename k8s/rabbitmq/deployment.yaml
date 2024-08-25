@@ -18,3 +18,10 @@ spec:
         ports:
         - containerPort: 5672
         - containerPort: 15672
+        resources:
+          requests:
+            memory: "1638Mi"  # 1.6Gi
+            cpu: "1600m"      # 1.6 CPUs
+          limits:
+            memory: "2048Mi"  # 2Gi (100% of node)
+            cpu: "2000m"      # 2 CPUs (100% of node)

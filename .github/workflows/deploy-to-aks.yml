@@ -117,6 +117,12 @@ jobs:
         kubectl apply -f k8s/dashboard/deployment.yaml
         kubectl apply -f k8s/dashboard/service.yaml
 
+        # Autoscaling
+        hpa_dirs=("background-job" "quiz" "rabbit" "redis" "api" "assignment" "chat")
+        for hpa in "${hpa_dirs[@]}"; do
+          kubectl apply -f k8s/hpas/$hpa.yaml -n edtech-assistant-namespace
+        done
+
         # Verify deployments
         kubectl get pods -n edtech-assistant-namespace
         kubectl get services -n edtech-assistant-namespace

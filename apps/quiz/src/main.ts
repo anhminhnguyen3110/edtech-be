@@ -43,8 +43,15 @@ async function bootstrap() {
     });
 
     const redisIoAdapter = new RedisIoAdapter(app);
-    await redisIoAdapter.connectToRedis();
-    app.useWebSocketAdapter(redisIoAdapter);
+    await redisIoAdapter.connectToRedis(
+        `redis://${configService.get<string>(ECommonConfig.REDIS_HOST)}:${configService.get<string>(
+            ECommonConfig.REDIS_PORT,
+        )}`,
+    );
+
+    if(redisIoAdapter.isConnected) {
+        app.useWebSocketAdapter(redisIoAdapter);
+    }
 
     await app.startAllMicroservices();
     await app.listen(httpPort);

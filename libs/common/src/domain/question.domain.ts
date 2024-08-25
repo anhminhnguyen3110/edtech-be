@@ -40,8 +40,8 @@ export class Question {
 
                 const onlyAnswer = this.correctAnswers[0];
 
-                if (this.choices.length < 2 || this.choices.length > 6) {
-                    return [false, 'Number of choices must be between 2 and 6'];
+                if (this.choices.length < 2 || this.choices.length > 4) {
+                    return [false, 'Number of choices must be between 2 and 4'];
                 }
 
                 if (!this.choices.includes(onlyAnswer)) {
@@ -112,8 +112,8 @@ export class Question {
                     ];
                 }
 
-                if (this.choices.length < 2 || this.choices.length > 6) {
-                    return [false, 'Number of choices must be between 2 and 6'];
+                if (this.choices.length < 2 || this.choices.length > 4) {
+                    return [false, 'Number of choices must be between 2 and 4'];
                 }
 
                 if (!this.correctAnswers.every(answer => this.choices.includes(answer))) {
