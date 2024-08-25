@@ -108,10 +108,6 @@ jobs:
           kubectl apply -f $dir/service.yaml -n edtech-assistant-namespace
         done
 
-        # Deploy ingress controller and load balancer
-        kubectl apply -f k8s/ssl/issuer.yaml -n edtech-assistant-namespace
-        kubectl apply -f k8s/ingress/ingress.yaml -n edtech-assistant-namespace
-
         # Dashboard
         kubectl apply -f k8s/dashboard/admin.yaml
         kubectl apply -f k8s/dashboard/deployment.yaml

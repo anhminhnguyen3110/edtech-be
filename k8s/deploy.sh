@@ -13,9 +13,9 @@ for dir in "${dirs[@]}"; do
   kubectl apply -f $dir/service.yaml -n edtech-assistant-namespace
 done
 
-# Wait for 1 minute before deploying the next set of services
-echo "Waiting for 1 minute before deploying the next set of services..."
-sleep 60
+# Wait for 2 minute before deploying the next set of services
+echo "Waiting for 2 minute before deploying the next set of services..."
+sleep 120
 
 # List of directories that require waiting between deployments
 wait_dirs=("api" "assignment" "background-job" "chat" "quiz")

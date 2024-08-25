@@ -522,7 +522,7 @@ export class ChatService {
 
         const payload: IChatPayload = {
             messages: [currentChat],
-            temperature: this.temperature,
+            temperature: 0.7,
         };
 
         return await this.languageModelService.getCompletion(payload, EModelDeployment.GPT4O);
