@@ -17,12 +17,14 @@ export class GameHistoryService {
         const { gameId, questionId, playersAnswered } = data;
 
         const queryRunner = await this.gameHistoryRepo.getQueryRunner();
+        await queryRunner.connect();
+
         try {
-            await queryRunner.connect();
             await queryRunner.startTransaction();
+
             for (const player of playersAnswered) {
                 try {
-                    await this.gameHistoryRepo.save({
+                    this.gameHistoryRepo.save({
                         gameId,
                         playerId: player.playerId,
                         questionId,
@@ -37,18 +39,15 @@ export class GameHistoryService {
                         rank: player.rank,
                     });
                 } catch (error) {
-                    await queryRunner.rollbackTransaction();
-                    this.logger.error(error);
-                    this.logger.error(
-                        `Failed to save game history for player ${player.playerId}`,
-                        error,
-                    );
-                    return;
+                    this.logger.error(`Failed to save game history for player ${player.playerId}`, error);
+                    throw error; // Re-throw error to trigger transaction rollback
                 }
             }
+
             await queryRunner.commitTransaction();
         } catch (error) {
             await queryRunner.rollbackTransaction();
+            this.logger.error('Transaction failed. Rolling back.', error);
         } finally {
             await queryRunner.release();
         }
