@@ -49,7 +49,7 @@ async function bootstrap() {
         )}`,
     );
 
-    if(redisIoAdapter.isConnected) {
+    if (redisIoAdapter.isConnected) {
         app.useWebSocketAdapter(redisIoAdapter);
     }
 

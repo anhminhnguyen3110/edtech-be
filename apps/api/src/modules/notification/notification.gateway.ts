@@ -17,8 +17,6 @@ import { CreateNotificationRequestDto } from './dtos/create-notification-request
 
 @WebSocketGateway(configuration().API_SOCKET_PORT, {
     namespace: ENamespace.NOTIFICATION,
-    pingInterval: 25000,
-    pingTimeout: 120000,
 })
 export class NotificationGateway implements OnGatewayConnection, OnGatewayDisconnect {
     constructor(

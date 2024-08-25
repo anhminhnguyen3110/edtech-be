@@ -1,9 +1,9 @@
-import { IoAdapter } from "@nestjs/platform-socket.io";
-import { ServerOptions } from 'socket.io';
+import { Logger } from '@nestjs/common';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 import { createAdapter } from '@socket.io/redis-adapter';
-import Redis from "ioredis";
-import { RedisOptions } from "ioredis/built/redis/RedisOptions";
-import { Logger } from "@nestjs/common";
+import Redis from 'ioredis';
+import { RedisOptions } from 'ioredis/built/redis/RedisOptions';
+import { ServerOptions } from 'socket.io';
 
 export class RedisIoAdapter extends IoAdapter {
     private adapterConstructor: ReturnType<typeof createAdapter>;

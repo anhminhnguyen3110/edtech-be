@@ -46,8 +46,6 @@ import { GameHelperService } from './game.helper';
 
 @WebSocketGateway(configuration().QUIZ_WS_PORT, {
     namespace: ENamespace.GAME,
-    pingInterval: 25000,
-    pingTimeout: 120000,
 })
 @UsePipes(new ValidationPipe({ transform: true }))
 export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {

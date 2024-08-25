@@ -39,7 +39,10 @@ export class GameHistoryService {
                         rank: player.rank,
                     });
                 } catch (error) {
-                    this.logger.error(`Failed to save game history for player ${player.playerId}`, error);
+                    this.logger.error(
+                        `Failed to save game history for player ${player.playerId}`,
+                        error,
+                    );
                     throw error; // Re-throw error to trigger transaction rollback
                 }
             }
