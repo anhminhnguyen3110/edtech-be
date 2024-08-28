@@ -26,22 +26,22 @@ export class CreateQuestionRequestDto {
 
     @ApiPropertyOptional({
         description: 'The choices for the question',
-        type: [String],
-        example: ['Paris', 'London', 'Berlin', 'Madrid'],
+        type: String,
+        example: 'Paris\0London\0Berlin\0Madrid',
     })
     @IsOptional()
     @IsString({ each: true })
-    @Transform(({ value }) => value.split(','))
+    @Transform(({ value }) => value.split('\0'))
     choices: string[];
 
     @ApiProperty({
         description: 'The correct answer to the question',
-        example: ['Paris'],
-        type: [String],
+        type: String,
+        example: 'Paris',
     })
     @IsNotEmpty()
     @IsString({ each: true })
-    @Transform(({ value }) => value.split(','))
+    @Transform(({ value }) => value.split('\0'))
     correctAnswers: string[];
 
     @ApiProperty({
