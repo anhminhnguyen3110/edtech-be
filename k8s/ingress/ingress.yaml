@@ -8,6 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "20m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "250"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "250"
+    nginx.org/websocket-services: "quiz-service"
 spec:
   tls:
   - hosts:
