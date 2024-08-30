@@ -139,7 +139,8 @@ export class LessonService {
                 })
                 .pipe(timeout(3000));
             const response = new GenerateLessonResponseDto();
-            response.message = 'Request send successfully';
+            response.message =
+                'Lesson generating is being run in the background, please wait for 3-5 minutes. In the meantime, you can do other things.';
             return response;
         } catch (error) {
             throw new BadRequestException({

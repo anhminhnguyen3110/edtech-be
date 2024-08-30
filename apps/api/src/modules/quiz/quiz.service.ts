@@ -223,7 +223,8 @@ export class QuizService {
 
             const response = new GenerateQuizResponseDto();
 
-            response.message = 'Request send successfully';
+            response.message =
+                'Quiz generating is being run in the background, please wait for 3-5 minutes. In the meantime, you can do other things.';
 
             return response;
         } catch (error) {

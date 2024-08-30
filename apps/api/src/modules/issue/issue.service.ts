@@ -159,7 +159,8 @@ export class IssueService {
                 .pipe(timeout(3000));
 
             const response: ExtractIssuesResponseDto = {
-                message: 'Request send successfully',
+                message:
+                    'Extracting issues is being run in the background and might take 5-10 minutes, please wait. In the meantime, you can do other things.',
             };
             return response;
         } catch (error) {
