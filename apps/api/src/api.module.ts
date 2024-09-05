@@ -9,7 +9,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ApiController } from './api.controller';
 import { ApiService } from './api.service';
 import { EConfig } from './config/interfaces/config.interface';
 import { configuration, validationSchema } from './config/validate/config.validate';
@@ -47,7 +46,6 @@ import { DataSourceService } from './shared/database/data-source.service';
         RedisModule,
         prometheusModule('/metrics', 'api'),
     ],
-    controllers: [ApiController],
     providers: [ApiService],
 })
 export class ApiModule {}
