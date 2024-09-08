@@ -1,4 +1,3 @@
-import { ECommonConfig } from '@app/common/config/interfaces/config.interface';
 import { EApiRoute } from '@app/common/constants/route.constants';
 import { UserPayloadDto } from '@app/common/dtos/user-payload.dto';
 import { RedisService } from '@app/common/redis/redis.service';
@@ -37,24 +36,7 @@ export class LessonController {
         @Body() generateLessonRequestDto: GenerateLessonRequestDto,
         @UserPayload() userPayload: UserPayloadDto,
     ) {
-        const cacheKey = `${EApiRoute.LESSON}_${userPayload.id}_${JSON.stringify(
-            generateLessonRequestDto,
-        )}`;
-
-        const cacheMessage = await this.redisService.get(cacheKey);
-
-        if (cacheMessage) return cacheMessage;
-
-        const newMessage = await this.lessonService.generateLesson(
-            generateLessonRequestDto,
-            userPayload,
-        );
-
-        if (this.configService.get(ECommonConfig.IS_CACHE_ENABLE)) {
-            await this.redisService.set(cacheKey, newMessage);
-        }
-
-        return newMessage;
+        return await this.lessonService.generateLesson(generateLessonRequestDto, userPayload);
     }
 
     @Put(':id')

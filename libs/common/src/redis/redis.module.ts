@@ -3,7 +3,6 @@ import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { RedisOptions } from './redis.config';
-import { RedisController } from './redis.controller';
 import { RedisService } from './redis.service';
 
 @Global()

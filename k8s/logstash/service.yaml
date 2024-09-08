@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config
+  labels:
+    app: logstash
+data:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+    filter {
+      # Example filter block to parse JSON logs
+      json {
+        source => "message"
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["${ELASTICSEARCH_HOST}"]
+        user => "${ELASTICSEARCH_USERNAME}"
+        password => "${ELASTICSEARCH_PASSWORD}"
+        index => "logs-%{+YYYY.MM.dd}"
+      }
+      stdout { codec => rubydebug }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash-service
+  labels:
+    app: logstash
+spec:
+  selector:
+    app: logstash
+  ports:
+  - name: logstash-port
+    port: 5044
+    targetPort: 5044
+  - name: http
+    port: 9600
+    targetPort: 9600
+  type: ClusterIP

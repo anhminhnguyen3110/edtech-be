@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IChatPayload } from '../constants/chat.constant';
 import { EChatService } from '../constants/service.constant';
 import { LanguageModelAbstract } from './language-model.abstract';
-import { EModelDeployment, ILanguageModelFunction } from './language-model.interface';
+import { EModelDeployment } from './language-model.interface';
 
 @Injectable()
 export class LanguageModelService extends LanguageModelAbstract {

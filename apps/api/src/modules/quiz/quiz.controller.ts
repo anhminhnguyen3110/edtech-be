@@ -1,4 +1,3 @@
-import { ECommonConfig } from '@app/common/config/interfaces/config.interface';
 import { EApiRoute } from '@app/common/constants/route.constants';
 import { UserPayloadDto } from '@app/common/dtos/user-payload.dto';
 import { PaginationResponseDto } from '@app/common/paginate/pagination-response.dto';
@@ -116,20 +115,6 @@ export class QuizController {
         @Body() generateQuizRequestDto: GenerateQuizRequestDto,
         @UserPayload() userPayload: UserPayloadDto,
     ) {
-        const cacheKey = `${EApiRoute.Quiz}_${userPayload.id}_${JSON.stringify(
-            generateQuizRequestDto,
-        )}`;
-
-        const cacheMessage = await this.redisService.get(cacheKey);
-
-        if (cacheMessage) return cacheMessage;
-
-        const newMessage = await this.quizService.generateQuiz(generateQuizRequestDto, userPayload);
-
-        if (this.configService.get(ECommonConfig.IS_CACHE_ENABLE)) {
-            await this.redisService.set(cacheKey, newMessage);
-        }
-
-        return newMessage;
+        return await this.quizService.generateQuiz(generateQuizRequestDto, userPayload);
     }
 }
