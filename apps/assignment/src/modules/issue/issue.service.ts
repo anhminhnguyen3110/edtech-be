@@ -596,6 +596,32 @@ export class IssueService {
             },
         });
         const { issues, accountId } = data;
+
+        const existedIssues: IssueEntity[] = await this.issueRepo.find({
+            where: {
+                classAssignmentId: issues[0].classAssignmentId,
+            },
+        });
+
+        if (existedIssues.length > 0) {
+            this.logger.warn(
+                `Issues already extracted for class assignment ${issues[0].classAssignmentId}`,
+            );
+
+            const createNotificationRequestDto: CreateNotificationRequestDto = {
+                message: `Issues already extracted for class assignment ${issues[0].classAssignmentId}`,
+                eventType: ENotificationEventType.EXTRACT_ISSUE_FAILED,
+                classAssignmentId: issues[0].classAssignmentId,
+            };
+
+            this.apiService.emit(ECommandNotification.CREATE_NOTIFICATION, {
+                createNotificationRequestDto,
+                accountId,
+            });
+
+            return;
+        }
+
         const queryRunner = this.issueRepo.createQueryRunner();
         try {
             await queryRunner.connect();

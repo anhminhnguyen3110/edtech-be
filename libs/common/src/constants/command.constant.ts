@@ -50,13 +50,24 @@ export enum ECommandQuestion {
 
 export enum ECommandGame {
     CREATE_GAME = 'game-create',
-    UPDATE_GAME = 'game-update',
     GET_GAME_DETAIL = 'game-get-detail',
     GET_GAMES = 'game-get-games',
+    UPDATE_GAME_STATUS = 'game-update-status',
 }
 
 export enum ECommandGameHistory {
     SAVE_GAME_HISTORY = 'game-history-save',
+    GET_GAME_HISTORY_DETAIL = 'game-history-get-detail',
+    GET_PLAYERS_BY_ACCOUNT_ID = 'game-get-players-by-account-id',
+    GET_PLAYERS_PERFORMANCE_PLAYER_SEARCH = 'game-get-players-performance',
+    GET_QUESTIONS_BY_GAME_ID = 'game-get-question-by-game-history-id',
+    GET_PLAYERS_BY_GAME_ID = 'game-get-players-by-history-id',
+    GET_PLAYER_DETAIL_BY_GAME_ID = 'game-get-players-detail-by-history-id',
+    GET_PLAYERS_PERFORMANCE_GAME_SEARCH = 'game-get-players-performance-game-search',
+    GET_QUESTION_DETAIL_BY_GAME_ID = 'game-get-question-detail-by-game-history-id',
+    GET_GAME_HISTORY_PERFORMANCE_BY_NICKNAME = 'game-get-game-history-performance-by-nickname',
+    GET_PERFORMANCE_DETAIL = 'game-get-performance-detail',
+    GET_PERFORMANCE_INSIGHT = 'game-get-performance-insight',
 }
 
 export enum ECommandNotification {

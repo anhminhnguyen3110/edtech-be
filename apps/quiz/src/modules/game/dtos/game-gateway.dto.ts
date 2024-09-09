@@ -1,7 +1,17 @@
+import { EGameStatus } from '@app/common/constants/table.constant';
 import { PartialType } from '@nestjs/swagger';
 import { GetQuestionResponseDto } from 'apps/api/src/modules/question/dtos/get-question-response.dto';
 import { Type } from 'class-transformer';
-import { IsArray, IsDate, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
+import {
+    IsArray,
+    IsDate,
+    IsEnum,
+    IsInt,
+    IsNotEmpty,
+    IsNumber,
+    IsString,
+    Min,
+} from 'class-validator';
 
 export class WsHostJoinRequestDto {
     @IsString()
@@ -79,6 +89,7 @@ export class WsQuestionPlayerResultDto {
     timeSubmitted: Date;
     currentScore: number;
     rank: number;
+    timeSpent: number;
 }
 
 export class WsQuizRankResponseDto {
@@ -141,4 +152,14 @@ export class WsAnswerSubmittedResponseDto {
 export class GetClientResponseDto {
     gameCode: string;
     role: string;
+}
+
+export class UpdateGameStatusRequestDto {
+    @IsNotEmpty()
+    @IsNumber()
+    gameId: number;
+
+    @IsNotEmpty()
+    @IsEnum(EGameStatus)
+    status: EGameStatus;
 }

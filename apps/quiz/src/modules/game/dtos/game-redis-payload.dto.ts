@@ -45,4 +45,10 @@ export class GameRedisPayloadDto extends PartialType(CreateGameResponseDto) {
         example: 'TxZWHz6XC75ejiBqAAAB',
     })
     hostClientId?: string;
+
+    @ApiResponseProperty({
+        type: String,
+        example: '2021-06-07T06:00:00.000Z',
+    })
+    questionStartTime?: string;
 }

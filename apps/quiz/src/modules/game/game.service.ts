@@ -12,12 +12,12 @@ import { CreateGameRequestDto } from 'apps/api/src/modules/game/dtos/create-game
 import { CreateGameResponseDto } from 'apps/api/src/modules/game/dtos/create-game-response.dto';
 import { GetGameRequestDto } from 'apps/api/src/modules/game/dtos/get-game-request.dto';
 import { GetGameResponseDto } from 'apps/api/src/modules/game/dtos/get-game-response.dto';
-import { UpdateGameRequestDto } from 'apps/api/src/modules/game/dtos/update-game-request.dto';
 import { UpdateGameResponseDto } from 'apps/api/src/modules/game/dtos/update-game.response.dto';
 import { GetQuizResponseDto } from 'apps/api/src/modules/quiz/dtos/get-quiz-response.dto';
 
 import { QuizRepository } from '../quiz/models/quiz.repository';
 import { QuizService } from '../quiz/quiz.service';
+import { UpdateGameStatusRequestDto } from './dtos/game-gateway.dto';
 import { GameRedisPayloadDto } from './dtos/game-redis-payload.dto';
 import { GameEntity } from './models/game.entity';
 import { GameRepository } from './models/game.repository';
@@ -174,28 +174,24 @@ export class GameService {
         return response;
     }
 
-    async updateGame(data: {
-        id: Game['id'];
-        updateGameRequestDto: UpdateGameRequestDto;
-        userPayload?: UserPayloadDto;
-    }): Promise<UpdateGameResponseDto> {
+    async updateGameStatus(data: UpdateGameStatusRequestDto): Promise<UpdateGameResponseDto> {
         this.logger.info('Data enter game microservice: Updating game', {
             prop: { ...data },
         });
 
-        const { id, updateGameRequestDto, userPayload } = data;
+        const { gameId, status } = data;
 
         let game: GameEntity;
         try {
             game = await this.gameRepo.findOne({
-                where: { id },
+                where: {
+                    id: gameId,
+                },
             });
         } catch (error) {
             this.logger.error('Error retrieving game', {
                 prop: {
-                    id,
-                    updateGameRequestDto,
-                    userPayload,
+                    ...data,
                 },
                 error,
             });
@@ -216,16 +212,14 @@ export class GameService {
         }
 
         try {
-            game.gameStatus = updateGameRequestDto.gameStatus;
+            game.gameStatus = status;
             // Update other fields as necessary
 
             game = await this.gameRepo.save(game);
         } catch (error) {
             this.logger.error('Error updating game', {
                 prop: {
-                    id,
-                    updateGameRequestDto,
-                    userPayload,
+                    ...data,
                 },
                 error,
             });
@@ -261,7 +255,7 @@ export class GameService {
         try {
             game = await this.gameRepo.findOne({
                 where: { id },
-                relations: ['quiz'],
+                relations: ['quiz', 'quiz.questions'],
             });
         } catch (error) {
             this.logger.error('Error retrieving game details', {
@@ -304,6 +298,7 @@ export class GameService {
         response.quizName = game.quiz.name;
         response.status = game.gameStatus;
         response.gameCode = game.gameCode;
+        response.noQuestions = game.quiz.questions.length;
 
         return response;
     }
@@ -324,30 +319,32 @@ export class GameService {
 
         const { getGameRequestDto, userPayload } = data;
 
-        const quiz = await this.quizRepo.findOne({
-            where: { id: getGameRequestDto.quizId },
-        });
-
-        if (!quiz) {
-            throw new RpcException({
-                message: 'Quiz not found',
-                status: HttpStatus.NOT_FOUND,
-                code: 'quiz-game-service-ts-get-error-#0001',
+        if (getGameRequestDto.quizId) {
+            const quiz = await this.quizRepo.findOne({
+                where: { id: getGameRequestDto.quizId },
             });
-        }
 
-        if (userPayload.id !== quiz.accountId) {
-            throw new RpcException({
-                message: 'Unauthorized',
-                status: HttpStatus.UNAUTHORIZED,
-                code: 'quiz-game-service-ts-get-error-#0002',
-            });
+            if (!quiz) {
+                throw new RpcException({
+                    message: 'Quiz not found',
+                    status: HttpStatus.NOT_FOUND,
+                    code: 'quiz-game-service-ts-get-error-#0001',
+                });
+            }
+
+            if (userPayload.id !== quiz.accountId) {
+                throw new RpcException({
+                    message: 'Unauthorized',
+                    status: HttpStatus.UNAUTHORIZED,
+                    code: 'quiz-game-service-ts-get-error-#0002',
+                });
+            }
         }
 
         let games: GameEntity[];
         let total: number;
         try {
-            [games, total] = await this.gameRepo.paginateGames(getGameRequestDto);
+            [games, total] = await this.gameRepo.paginateGames(userPayload.id, getGameRequestDto);
         } catch (error) {
             this.logger.error('Error retrieving games', {
                 prop: { getGameRequestDto, userPayload },
@@ -366,8 +363,9 @@ export class GameService {
             response.id = game.id;
             response.quizId = game.quiz.id;
             response.quizName = game.quiz.name;
-            response.status = game.gameStatus;
             response.gameCode = game.gameCode;
+            response.startedAt = game.createdAt;
+            response.status = game.gameStatus;
 
             return response;
         });

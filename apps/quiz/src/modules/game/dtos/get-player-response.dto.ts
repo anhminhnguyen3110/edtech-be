@@ -63,6 +63,7 @@ export class GetPlayerResponseDto {
         questionIndexInQuiz: number;
         playerAnswer: string[];
         timeSubmitted: Date;
+        timeSpent: number;
         pointAwarded: number;
         isCorrect: boolean;
     };
@@ -89,6 +90,12 @@ export class GetPlayersAnswerResponseDto extends OmitType(GetPlayerResponseDto, 
         example: new Date().toISOString(),
     })
     timeSubmitted: Date;
+
+    @ApiResponseProperty({
+        type: Number,
+        example: 1,
+    })
+    timeSpent: number;
 
     @ApiResponseProperty({
         type: Number,

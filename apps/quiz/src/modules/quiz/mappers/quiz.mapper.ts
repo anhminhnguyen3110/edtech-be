@@ -42,6 +42,7 @@ export function mapEntityToGetQuizResponseDto(quizEntity: QuizEntity): GetQuizRe
     response.name = quizEntity.name;
     response.description = quizEntity.description;
     response.classAssignmentId = quizEntity.classAssignmentId;
+    response.totalQuestions = quizEntity.questions.length;
     return response;
 }
 

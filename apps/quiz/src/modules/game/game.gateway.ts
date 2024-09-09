@@ -1,5 +1,5 @@
 import { EGameRedisPrefixKey, EGameRole } from '@app/common/constants/cache.constant';
-import { ECommandGameHistory } from '@app/common/constants/command.constant';
+import { ECommandGame, ECommandGameHistory } from '@app/common/constants/command.constant';
 import { ENamespace } from '@app/common/constants/route.constants';
 import { ELoggerService, ERegisterMicroservice } from '@app/common/constants/service.constant';
 import { EGameStatus } from '@app/common/constants/table.constant';
@@ -24,6 +24,7 @@ import { configuration } from '../../config/validate/config.validate';
 import { CreateGameHistoryRequestDto } from '../game-history/dtos/create-game-history.dto';
 import {
     GetClientResponseDto,
+    UpdateGameStatusRequestDto,
     WsAnswerSubmittedRequestDto,
     WsAnswerSubmittedResponseDto,
     WsGetQuestionResponseDto,
@@ -57,7 +58,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
         @Inject(ELoggerService.LOGGER_KEY)
         private readonly logger: ILogger,
         @Inject(ERegisterMicroservice.QUIZ_SERVICE_RABBIT_MQ)
-        private readonly gameHistoryClient: ClientProxy,
+        private readonly gameServiceClient: ClientProxy,
         private readonly gameHelperService: GameHelperService,
     ) {}
 
@@ -98,6 +99,11 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
                         game.status = EGameStatus.TERMINATED;
                         game.hostClientId = null;
                         await this.redisService.set(gameKey, game);
+
+                        this.gameServiceClient.emit(ECommandGame.UPDATE_GAME_STATUS, {
+                            gameId: game.id,
+                            status: EGameStatus.TERMINATED,
+                        } as UpdateGameStatusRequestDto);
                     }
 
                     await this.redisService.del(playersKey);
@@ -474,6 +480,10 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     message: 'Game has ended',
                     gameCode,
                 });
+                this.gameServiceClient.emit(ECommandGame.UPDATE_GAME_STATUS, {
+                    gameId: game.id,
+                    status: EGameStatus.COMPLETED,
+                } as UpdateGameStatusRequestDto);
                 return;
             } else {
                 nextQuestion = game.quiz.questions[questionIndexInQuiz];
@@ -486,11 +496,18 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     message: 'Game has ended',
                     gameCode,
                 });
+                this.gameServiceClient.emit(ECommandGame.UPDATE_GAME_STATUS, {
+                    gameId: game.id,
+                    status: EGameStatus.COMPLETED,
+                } as UpdateGameStatusRequestDto);
                 return;
             }
 
-            if (nextQuestion) delete nextQuestion.correctAnswers;
             const releaseTimeUtc = moment.utc().add(delayTimeInSeconds, 'seconds').toISOString();
+            game.questionStartTime = releaseTimeUtc;
+            await this.redisService.set(gameKey, game);
+
+            if (nextQuestion) delete nextQuestion.correctAnswers;
 
             const hostData: WsGetQuestionResponseDto = {
                 ...nextQuestion,
@@ -591,6 +608,8 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 questionIndexInQuiz,
                 playerAnswer,
                 timeSubmitted: submittedTime || new Date(),
+                timeSpent:
+                    moment(submittedTime).diff(game.questionStartTime, 'milliseconds') / 1000,
                 pointAwarded: 0,
                 isCorrect: false,
             };
@@ -732,6 +751,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     pointAwarded: player.pointAwarded,
                     strikeCount: player.strikeCount,
                     timeSubmitted: player.timeSubmitted,
+                    timeSpent: player.timeSpent,
                     currentScore: player.score,
                     rank: player.rank,
                 }),
@@ -789,7 +809,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
         try {
             if (gameHistory) {
-                this.gameHistoryClient.emit(ECommandGameHistory.SAVE_GAME_HISTORY, gameHistory);
+                this.gameServiceClient.emit(ECommandGameHistory.SAVE_GAME_HISTORY, gameHistory);
             }
         } catch (error) {
             this.logger.error(error);

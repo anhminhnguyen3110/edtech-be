@@ -220,6 +220,7 @@ export class QuizService {
                 quizDetail.description = quizEntity.description;
                 quizDetail.classAssignmentId = quizEntity.classAssignmentId;
                 quizDetail.questions = questions;
+                quizDetail.totalQuestions = questions.length;
                 return quizDetail;
             }
         } catch (error) {
