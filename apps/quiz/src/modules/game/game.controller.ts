@@ -5,8 +5,8 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { CreateGameRequestDto } from 'apps/api/src/modules/game/dtos/create-game-request.dto';
 import { GetGameRequestDto } from 'apps/api/src/modules/game/dtos/get-game-request.dto';
-import { UpdateGameRequestDto } from 'apps/api/src/modules/game/dtos/update-game-request.dto';
 
+import { UpdateGameStatusRequestDto } from './dtos/game-gateway.dto';
 import { GameService } from './game.service';
 
 @Controller()
@@ -22,18 +22,6 @@ export class GameController {
         },
     ) {
         return await this.gameService.createGame(data);
-    }
-
-    @MessagePattern(ECommandGame.UPDATE_GAME)
-    async updateGameStatus(
-        @Payload()
-        data: {
-            id: Game['id'];
-            updateGameRequestDto: UpdateGameRequestDto;
-            userPayload: UserPayloadDto;
-        },
-    ) {
-        return await this.gameService.updateGame(data);
     }
 
     @MessagePattern(ECommandGame.GET_GAME_DETAIL)
@@ -56,5 +44,10 @@ export class GameController {
         },
     ) {
         return await this.gameService.getGames(data);
+    }
+
+    @MessagePattern(ECommandGame.UPDATE_GAME_STATUS)
+    async updateGameStatus(@Payload() data: UpdateGameStatusRequestDto) {
+        return await this.gameService.updateGameStatus(data);
     }
 }

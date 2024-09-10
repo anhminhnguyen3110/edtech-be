@@ -1,7 +1,6 @@
 import { EApiRoute } from '@app/common/constants/route.constants';
 import { UserPayloadDto } from '@app/common/dtos/user-payload.dto';
 import { PaginationResponseDto } from '@app/common/paginate/pagination-response.dto';
-import { RedisService } from '@app/common/redis/redis.service';
 import {
     Body,
     Delete,
@@ -13,7 +12,6 @@ import {
     Post,
     Query,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { ApiSwaggerController } from '../../shared/decorators/api-class.decorator';
 import { ApiSwaggerInfo } from '../../shared/decorators/api.decorator';
@@ -31,11 +29,7 @@ import { QuizService } from './quiz.service';
 @ApiSwaggerController({ name: EApiRoute.Quiz })
 @RestrictToTeacher()
 export class QuizController {
-    constructor(
-        private readonly quizService: QuizService,
-        private readonly redisService: RedisService,
-        private readonly configService: ConfigService,
-    ) {}
+    constructor(private readonly quizService: QuizService) {}
 
     @Post()
     @ApiSwaggerInfo({

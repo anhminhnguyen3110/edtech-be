@@ -64,7 +64,9 @@ export class QuestionService {
                 code: error.code || 'api-question-service-create-error-#0001',
             } as IErrorResponseDto);
         } finally {
-            this.fileService.removeFile(s3StageFilePath);
+            if (s3StageFilePath) {
+                this.fileService.removeFile(s3StageFilePath);
+            }
         }
 
         return createdQuestion;
@@ -106,7 +108,9 @@ export class QuestionService {
                 code: error.code || 'api-question-service-update-error-#0001',
             } as IErrorResponseDto);
         } finally {
-            this.fileService.removeFile(s3StageFilePath);
+            if (s3StageFilePath) {
+                this.fileService.removeFile(s3StageFilePath);
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-import { ETableName } from '@app/common/constants/table.constant';
+import { EGameStatus, ETableName } from '@app/common/constants/table.constant';
 import { BaseRepository } from '@app/common/database/base.repository';
 import { Injectable } from '@nestjs/common';
 import { GetGameRequestDto } from 'apps/api/src/modules/game/dtos/get-game-request.dto';
@@ -16,12 +16,29 @@ export class GameRepository extends BaseRepository<GameEntity> {
         return this.createQb().orderBy('id', 'DESC').getOne();
     }
 
-    async paginateGames(getGameRequestDto: GetGameRequestDto): Promise<[GameEntity[], number]> {
+    async paginateGames(
+        accountId: number,
+        getGameRequestDto: GetGameRequestDto,
+    ): Promise<[GameEntity[], number]> {
         const qb = this.createQb().leftJoinAndSelect(`${this.alias}.quiz`, 'quiz');
 
         if (getGameRequestDto.quizId) {
             qb.andWhere('quiz.id = :quizId', {
                 quizId: getGameRequestDto.quizId,
+            });
+        }
+
+        qb.andWhere('quiz.accountId = :accountId', {
+            accountId,
+        });
+
+        qb.andWhere(`${this.alias}.game_status != :status`, {
+            status: EGameStatus.ACTIVE,
+        });
+
+        if (getGameRequestDto.quizNameSearch) {
+            qb.andWhere('quiz.name LIKE :quizNameSearch', {
+                quizNameSearch: `${getGameRequestDto.quizNameSearch}%`,
             });
         }
 

@@ -1,8 +1,6 @@
 import { EApiRoute } from '@app/common/constants/route.constants';
 import { UserPayloadDto } from '@app/common/dtos/user-payload.dto';
-import { RedisService } from '@app/common/redis/redis.service';
 import { Body, Delete, HttpStatus, Param, Post, Put } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { ApiSwaggerController } from '../../shared/decorators/api-class.decorator';
 import { ApiSwaggerInfo } from '../../shared/decorators/api.decorator';
@@ -20,11 +18,7 @@ import { LessonService } from './lesson.service';
 })
 @RestrictToTeacher()
 export class LessonController {
-    constructor(
-        private readonly lessonService: LessonService,
-        private readonly redisService: RedisService,
-        private readonly configService: ConfigService,
-    ) {}
+    constructor(private readonly lessonService: LessonService) {}
 
     @Post()
     @ApiSwaggerInfo({

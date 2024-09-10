@@ -48,3 +48,7 @@ terraform/.terraform.tfstate.backup
 
 .vscode/*
 **/docker-data
+
+# Ignore all file in sql folder
+sql/*
+*.sql

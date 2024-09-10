@@ -64,7 +64,7 @@ export class GenerateQuizRequestDto {
     @IsNotEmpty()
     @IsString()
     @MaxLength(1000)
-    prompt: string = 'I want to generate content using issues of this class assignment';
+    prompt = 'I want to generate content using issues of this class assignment';
 
     @ApiPropertyOptional({
         description: 'The number of multiple choice questions',

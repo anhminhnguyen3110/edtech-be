@@ -15,7 +15,9 @@ import { GameEntity } from '../../game/models/game.entity';
 import { QuestionEntity } from '../../question/models/question.entity';
 
 @Entity(ETableName.GAME_HISTORY)
-@Index(['gameId', 'playerId', 'questionId'])
+@Index(['gameId'])
+@Index(['questionId'])
+@Index(['nickname'])
 @Unique(['gameId', 'playerId', 'questionId'])
 export class GameHistoryEntity extends BaseEntity {
     @ManyToOne(() => GameEntity, game => game.gameHistories, {
@@ -98,6 +100,12 @@ export class GameHistoryEntity extends BaseEntity {
     timeSubmitted: Date;
 
     @Column({
+        name: 'time_spent',
+        type: 'double',
+    })
+    timeSpent: number;
+
+    @Column({
         name: 'nickname',
         type: 'varchar',
         length: 255,
@@ -119,12 +127,12 @@ export class GameHistoryEntity extends BaseEntity {
     rank?: number;
 
     @BeforeInsert()
-    setPlayerAnswerInDb(): void {
+    setPlayerAnswerInDb() {
         this.playerAnswerInDb = JSON.stringify(this.playerAnswer);
     }
 
     @AfterLoad()
-    setPlayerAnswer(): void {
+    setPlayerAnswer() {
         this.playerAnswer = JSON.parse(this.playerAnswerInDb);
     }
 }

@@ -16,6 +16,8 @@ export class QuizRepository extends BaseRepository<QuizEntity> {
         const { search, classAssignmentId, accountId } = getQuizRequestDto;
         const qb = this.createQb();
 
+        qb.leftJoinAndSelect(`${this.alias}.questions`, 'questions');
+
         if (search) {
             qb.andWhere(`${this.alias}.name LIKE :search`, {
                 search: `${search}%`,

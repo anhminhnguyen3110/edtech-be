@@ -72,7 +72,9 @@ export class ChatService {
                 code: error.code || 'api-chat-service-create-chat-message-#0001',
             });
         } finally {
-            this.fileService.removeFile(s3StageFilePath);
+            if (s3StageFilePath) {
+                this.fileService.removeFile(s3StageFilePath);
+            }
         }
         return createdChatMessageResponseDto;
     }
