@@ -250,6 +250,7 @@ export class QuizService {
                     id: id,
                     accountId: userPayload.id,
                 },
+                relations: ['questions'],
             });
 
             if (!quizEntity) {
