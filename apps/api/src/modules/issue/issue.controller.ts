@@ -117,19 +117,9 @@ export class IssueController {
         @Body() extractIssuesRequestDto: ExtractIssuesRequestDto,
         @UserPayload() userPayload: UserPayloadDto,
     ) {
-        const cacheKey = `${EApiRoute.ISSUE}_extract_${userPayload.id}_${extractIssuesRequestDto.classAssignmentId}`;
-        const cacheMessage = await this.redisService.get(cacheKey);
-        if (cacheMessage) return cacheMessage;
-
-        const newMessage = await this.issueService.extractIssues(
+        return this.issueService.extractIssues(
             extractIssuesRequestDto,
             userPayload,
         );
-
-        if (this.configService.get(ECommonConfig.IS_CACHE_ENABLE)) {
-            await this.redisService.set(cacheKey, newMessage);
-        }
-
-        return newMessage;
     }
 }
