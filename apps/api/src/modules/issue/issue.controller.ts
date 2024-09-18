@@ -117,9 +117,6 @@ export class IssueController {
         @Body() extractIssuesRequestDto: ExtractIssuesRequestDto,
         @UserPayload() userPayload: UserPayloadDto,
     ) {
-        return this.issueService.extractIssues(
-            extractIssuesRequestDto,
-            userPayload,
-        );
+        return this.issueService.extractIssues(extractIssuesRequestDto, userPayload);
     }
 }

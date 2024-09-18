@@ -22,6 +22,20 @@ export class GameRepository extends BaseRepository<GameEntity> {
     ): Promise<[GameEntity[], number]> {
         const qb = this.createQb().leftJoinAndSelect(`${this.alias}.quiz`, 'quiz');
 
+        qb.leftJoinAndMapMany(
+            `quiz.questions`,
+            'question',
+            'question',
+            'question.quizId = quiz.id',
+        );
+
+        qb.leftJoinAndMapMany(
+            `${this.alias}.gameHistories`,
+            'game_history',
+            'game_history',
+            `${this.alias}.id = game_history.gameId`,
+        );
+
         if (getGameRequestDto.quizId) {
             qb.andWhere('quiz.id = :quizId', {
                 quizId: getGameRequestDto.quizId,

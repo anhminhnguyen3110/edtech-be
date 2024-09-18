@@ -15,6 +15,7 @@ import { GetGameResponseDto } from 'apps/api/src/modules/game/dtos/get-game-resp
 import { UpdateGameResponseDto } from 'apps/api/src/modules/game/dtos/update-game.response.dto';
 import { GetQuizResponseDto } from 'apps/api/src/modules/quiz/dtos/get-quiz-response.dto';
 
+import { QuizEntity } from '../quiz/models/quiz.entity';
 import { QuizRepository } from '../quiz/models/quiz.repository';
 import { QuizService } from '../quiz/quiz.service';
 import { UpdateGameStatusRequestDto } from './dtos/game-gateway.dto';
@@ -318,25 +319,25 @@ export class GameService {
         });
 
         const { getGameRequestDto, userPayload } = data;
-
+        let quiz: QuizEntity;
         if (getGameRequestDto.quizId) {
-            const quiz = await this.quizRepo.findOne({
-                where: { id: getGameRequestDto.quizId },
-            });
-
-            if (!quiz) {
-                throw new RpcException({
-                    message: 'Quiz not found',
-                    status: HttpStatus.NOT_FOUND,
-                    code: 'quiz-game-service-ts-get-error-#0001',
+            try {
+                quiz = await this.quizRepo.findOneByOrFail({
+                    id: getGameRequestDto.quizId,
                 });
-            }
 
-            if (userPayload.id !== quiz.accountId) {
+                if (userPayload.id !== quiz.accountId) {
+                    throw new RpcException({
+                        message: 'Unauthorized',
+                        status: HttpStatus.UNAUTHORIZED,
+                        code: 'quiz-game-service-ts-get-error-#0002',
+                    });
+                }
+            } catch (error) {
                 throw new RpcException({
-                    message: 'Unauthorized',
-                    status: HttpStatus.UNAUTHORIZED,
-                    code: 'quiz-game-service-ts-get-error-#0002',
+                    message: error.message || error || 'Quiz not found',
+                    status: HttpStatus.INTERNAL_SERVER_ERROR,
+                    code: 'quiz-game-service-ts-get-error-#0001',
                 });
             }
         }
@@ -366,6 +367,10 @@ export class GameService {
             response.gameCode = game.gameCode;
             response.startedAt = game.createdAt;
             response.status = game.gameStatus;
+            response.noQuestions = game.quiz.questions.length;
+            response.noPlayers = [
+                ...new Set(game.gameHistories.map(history => history.playerId)),
+            ].length;
 
             return response;
         });

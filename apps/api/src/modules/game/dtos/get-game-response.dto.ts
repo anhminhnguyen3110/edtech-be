@@ -9,4 +9,10 @@ export class GetGameResponseDto extends PartialType(CreateGameResponseDto) {
         example: new Date(),
     })
     startedAt: Date;
+
+    @ApiResponseProperty({
+        type: Number,
+        example: 1,
+    })
+    noPlayers: number;
 }
