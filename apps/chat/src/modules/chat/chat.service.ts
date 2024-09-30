@@ -525,7 +525,7 @@ export class ChatService {
             temperature: 0.7,
         };
 
-        return await this.languageModelService.getCompletion(payload, EModelDeployment.GPT4O);
+        return await this.languageModelService.getCompletion(payload, EModelDeployment.GPT4O_MINI);
     }
 
     async getChatTopic(data: {

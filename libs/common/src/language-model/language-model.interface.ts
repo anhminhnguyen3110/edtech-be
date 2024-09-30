@@ -19,4 +19,5 @@ interface IParameterProperty {
 export enum EModelDeployment {
     GPT4O = 'gpt-4o',
     GPT35_TURBO = 'gpt-35-turbo-16k',
+    GPT4O_MINI = 'gpt-4o-mini',
 }
