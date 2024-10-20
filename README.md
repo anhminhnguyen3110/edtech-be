@@ -13,9 +13,11 @@ The application underwent stress testing using K6 to simulate real-world user in
 
   - A **peak test** was conducted over the course of one hour, gradually pushing the system to its limit.
   - At **85,000 concurrent users**, response times began to slow down, but no critical issues were observed.
-    ![peak.png](images/peak.webp)
+
+![peak.png](images/peak.webp)
   - At **90,000 concurrent users**, the application was pushed to its limit, leading to severe performance degradation, including slower response times, increased error rates, and eventual system failure.
-    ![fail.png](images/failure.png)
+
+![fail.png](images/failure.png)
 
 
 # All Diagrams
