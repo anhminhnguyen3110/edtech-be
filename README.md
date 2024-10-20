@@ -1,6 +1,8 @@
 # Edtech-BE (Microservices Backend)
 # Techstack
 ## Frontend
+You can find the front-end repository here: [Edtech Front-end Repository](https://github.com/anhminhnguyen3110/edtech-fe).
+
 <div style="display: inline-block; font-size: 22px;">
     <img src="images/react.png" alt="React" width="25" height="25"> ReactJS |
     <img src="images/nextjs.png" alt="Next.js" width="25" height="25" style="border-radius: 50%;"> NextJS |
