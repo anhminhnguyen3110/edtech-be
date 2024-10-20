@@ -1,4 +1,4 @@
-# Edtech-BE (Microservices Backend)
+# Edtech-BE (Microservices System For Edtech Assistant)
 # Techstack
 ## Frontend
 You can find the front-end repository here: [Edtech Front-end Repository](https://github.com/anhminhnguyen3110/edtech-fe).
