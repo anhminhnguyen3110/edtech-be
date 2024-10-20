@@ -23,8 +23,7 @@ You can find the front-end repository here: [Edtech Front-end Repository](https:
     <img src="images/mysql.png" alt="MySQL" width="25" height="25" style="border-radius: 50%;"> MySQL |
     <img src="images/prometheus.png" alt="Prometheus" width="25" height="25" style="border-radius: 50%;"> Prometheus |
     <img src="images/grafana.svg" alt="Grafana" width="25" height="25"> Grafana |
-    <img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch |
-    🧠 Advanced Retriever-Augmented Generation (RAG)
+    <img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch 
 </div>
 
 ## AI & Data Engineering    
@@ -37,8 +36,8 @@ You can find the front-end repository here: [Edtech Front-end Repository](https:
     <img src="images/zoo.webp" alt="Zookeeper" width="25" height="25"> Zookeeper |
     <img src="images/delta_lake.png" alt="Delta Lake" width="25" height="25"> Delta Lake |
     <img src="images/scrapy.webp" alt="Scrapy" width="25" height="25"> Scrapy |
-    <img src="images/selenium.png" alt="Selenium" width="25" height="25"> Selenium
-
+    <img src="images/selenium.png" alt="Selenium" width="25" height="25"> Selenium |
+    🧠 Advanced Retriever-Augmented Generation (RAG)
 </div>
 
 ## DevOps
