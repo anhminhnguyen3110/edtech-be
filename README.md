@@ -1,18 +1,77 @@
-# Edtech-BE-documentation
+# Edtech-BE (Microservices Backend)
 # Techstack
-NestJS 🛠️, TypeScript 📝, Kubernetes ☸️, Helm ⛵, Terraform 🌍, Docker 🐳, RabbitMQ 🐰, Redis 🧠, MySQL 🗄️, Prometheus 📊, Grafana 📈, ELK Stack 📂, Jest ✅, CI/CD Pipeline 🚀, GitHub Actions 🔄, Docker Hub 📦, Large Language Model (LLM) 🤖, Vector Database (VectorDB) 📐, K6 📊, CertManager 🔐, TLS Cluster Issuer 🔏, Nginx Load Balancer 🌐, Horizontal Pod Autoscaling ⚖️, Airflow 🌀, Kafka 📨, Azure Cloud ☁️.
+## Frontend
+<div style="display: inline-block;">
+    <img src="images/react.png" alt="React" width="25" height="25"> ReactJS |
+    <img src="images/next-js.svg" alt="Next.js" width="25" height="25" style="background-color: white; border-radius: 50%;"> NextJS |
+    <img src="images/socket-io.png" alt="Socket.IO" width="25" height="25" style="background-color: white; border-radius: 50%;"> Socket.IO |
+    <img src="images/material-ui.png" alt="Material-UI" width="25" height="25"> Material-UI |
+    <img src="images/seo.png" alt="SEO" width="25" height="25"> Search Engine Optimization (SEO) |
+    <img src="images/vercel.png" alt="Vercel" width="25" height="25"> Vercel
+</div>
+
+## Backend
+<div style="display: inline-block;">
+    <img src="images/nestjs.svg" alt="NestJS" width="25" height="25"> NestJS |
+    <img src="images/nodejs.png" alt="Node.js" width="25" height="25"> Node.js |
+    <img src="images/typescript.png" alt="TypeScript" width="25" height="25"> TypeScript |
+    <img src="images/rabbitmq.svg" alt="RabbitMQ" width="25" height="25"> RabbitMQ |
+    <img src="images/redis.svg" alt="Redis" width="25" height="25"> Redis |
+    <img src="images/redis-insight.png" alt="RedisInsight" width="25" height="25"> Redis Insight |
+    <img src="images/mysql.png" alt="MySQL" width="25" height="25" style="background-color: white; border-radius: 50%;"> MySQL |
+    <img src="images/prometheus.png" alt="Prometheus" width="25" height="25"> Prometheus |
+    <img src="images/grafana.svg" alt="Grafana" width="25" height="25"> Grafana |
+    <img src="images/llm.png" alt="LLM" width="25" height="25"> Large Language Model (LLM) |
+    <img src="images/VectorDB.png" alt="VectorDB" width="25" height="25" style="background-color: white; border-radius: 50%;"> Vector Database
+    <img src="images/Airflow.png" alt="Airflow" width="25" height="25"> Airflow |
+    <img src="images/Kafka.png" alt="Kafka" width="16" height="25"> Kafka |
+    <img src="images/zoo.webp" alt="Zookeeper" width="25" height="25"> Zookeeper |
+    <img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch |
+    🧠 Advanced Retriever-Augmented Generation (RAG)
+</div>
+
+## DevOps
+<div>
+    <img src="images/kubernetes.svg" alt="Kubernetes" width="25" height="25"> Kubernetes |
+    <img src="images/aks.png" alt="Azure Kubernetes Service" width="25" height="25"> Azure Kubernetes Service (AKS) |
+    <img src="images/helm.svg" alt="Helm" width="25" height="25" style="background-color: white; border-radius: 50%;"> Helm |
+    <img src="images/terraform.png" alt="Terraform" width="25" height="25"> Terraform |
+    <img src="images/docker.png" alt="Docker" width="25" height="16"> Docker |
+    <img src="images/AzureCloud.png" alt="Azure Cloud" width="25" height="25"> Azure Cloud |
+    <img src="images/porkbun.png" alt="Porkbun" width="25" height="25"> Porkbun DNS Provider |
+    <img src="images/nginx.svg" alt="Nginx" width="25" height="25"> Nginx Load Balancer |
+    <img src="images/CertManager.png" alt="CertManager" width="25" height="25"> CertManager |
+    <img src="images/lets-encrypt.png" alt="Let's Encrypt" width="25" height="25"> Let's Encrypt |
+    🔏 TLS Cluster Issuer |
+    🚀 Continuous Integration/Continuous Deployment (CI/CD) |
+    <img src="images/GitHub-Actions.png" alt="GitHub Actions" width="25" height="25"> GitHub Actions |
+    <img src="images/hpa.png" alt="Horizontal Pod Autoscaling" width="25" height="25"> Horizontal Pod Autoscaling (HPA) |
+    <img src="images/elk.svg" alt="ELK Stack" width="25" height="25"> ELK Stack 
+    (<img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch, 
+    <img src="images/Logstash.png" alt="Logstash" width="25" height="25"> Logstash, 
+    <img src="images/kibana.png" alt="Kibana" width="25" height="25"> Kibana, 
+    <img src="images/Filebeat.png" alt="Filebeat" width="25" height="25"> Filebeat)
+</div>
+
+## Testing
+<div>
+    <img src="images/jest.png" alt="Jest" width="25" height="25"> Jest |
+    <img src="images/K6.svg" alt="K6" width="25" height="25"> K6 |
+    <img src="images/puppeteer.png" alt="Puppeteer" width="25" height="25"> PuppeteerJS
+</div>
+
+<!-- Divider -->
+---
 
 # Performance Testing
 
 The application underwent stress testing using K6 to simulate real-world user interactions. The test was conducted in a cloud environment, allowing for scalable and realistic load conditions. Below are the key findings from the performance tests:
 
 - **Stress Test Setup**:
-
   - The test simulated common user actions such as login requests, data fetching, and page navigation.
   - The test was conducted by incrementally increasing the number of concurrent users, starting from 1,000.
 
 - **Test Results**:
-
   - A **peak test** was conducted over the course of one hour, gradually pushing the system to its limit.
   - At **85,000 concurrent users**, response times began to slow down, but no critical issues were observed.
 
