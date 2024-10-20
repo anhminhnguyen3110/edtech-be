@@ -29,7 +29,7 @@ You can find the front-end repository here: [Edtech Front-end Repository](https:
 ## AI & Data Engineering    
 <div style="display: inline-block; font-size: 22px;">
     <img src="images/llm.png" alt="LLM" width="25" height="25"> Large Language Model (LLM) |
-    <img src="images/VectorDB.png" alt="VectorDB" width="25" height="25" style="border-radius: 50%;"> Vector Database
+    <img src="images/VectorDB.png" alt="VectorDB" width="25" height="25" style="border-radius: 50%;"> Vector Database |
     <img src="images/Airflow.png" alt="Airflow" width="25" height="25"> Airflow |
     <img src="images/dbt.png" alt="dbt" width="75" height="25"> dbt |
     <img src="images/kafka.png" alt="Kafka" width="16" height="25"> Kafka |
