@@ -1,4 +1,6 @@
 # Edtech-BE-documentation
+# Techstack
+NestJS 🛠️, TypeScript 📝, Kubernetes ☸️, Helm ⛵, Terraform 🌍, Docker 🐳, RabbitMQ 🐰, Redis 🧠, MySQL 🗄️, Prometheus 📊, Grafana 📈, ELK Stack 📂, Jest ✅, CI/CD Pipeline 🚀, GitHub Actions 🔄, Docker Hub 📦, Large Language Model (LLM) 🤖, Vector Database (VectorDB) 📐, K6 📊, CertManager 🔐, TLS Cluster Issuer 🔏, Nginx Load Balancer 🌐, Horizontal Pod Autoscaling ⚖️, Airflow 🌀, Kafka 📨, Azure Cloud ☁️.
 
 # Performance Testing
 
