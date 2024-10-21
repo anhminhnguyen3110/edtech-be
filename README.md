@@ -30,8 +30,7 @@ You can access the web site from here: [Edtech Website](https://www.edtech-assis
 https://github.com/user-attachments/assets/dece0ded-eff1-4c5f-9665-4fa8f776bfec
 
 # Techstack
-## Frontend
-You can find the front-end repository here: [Edtech Front-end Repository](https://github.com/anhminhnguyen3110/edtech-fe).
+## Frontend [Repository](https://github.com/anhminhnguyen3110/edtech-fe)
 
 <div style="display: inline-block; font-size: 22px;">
     <img src="images/react.png" alt="React" width="25" height="25"> ReactJS |
