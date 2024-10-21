@@ -31,9 +31,7 @@ https://github.com/user-attachments/assets/dece0ded-eff1-4c5f-9665-4fa8f776bfec
 
 # Techstack
 ## Frontend
-You can find the front-end repository here: [Edtech Front-end Repository](https://github.c
-
-om/anhminhnguyen3110/edtech-fe).
+You can find the front-end repository here: [Edtech Front-end Repository](https://github.com/anhminhnguyen3110/edtech-fe).
 
 <div style="display: inline-block; font-size: 22px;">
     <img src="images/react.png" alt="React" width="25" height="25"> ReactJS |
