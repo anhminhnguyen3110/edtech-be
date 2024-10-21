@@ -19,8 +19,8 @@ You can access the web site from here: [Edtech Website](https://www.edtech-assis
 8. [Traditional HTTP Request Workflow (CRUD Operations)](#traditional-http-request-workflow-crud-operations)
 9. [Downstream Task Workflow (Time-Consuming Operations)](#downstream-task-workflow-time-consuming-operations)
 10. [PowerPoint Generator Architecture](#powerpoint-generator)
-11. [Intelligent Educational QA Assistant (High-level Architecture)](#intelligent-educational-qa-assistant-high-level-architecture)
-12. [Intelligent Educational QA Assistant (Low-level Architecture)](#intelligent-educational-qa-assistant-low-level-architecture)
+11. [Intelligent Educational Question Answering Assistant (High-level Architecture)](#intelligent-educational-question-answering-assistant-high-level-architecture)
+12. [Intelligent Educational Question Answering Assistant (Low-level Architecture)](#intelligent-educational-question-answering-assistant-low-level-architecture)
 13. [Game (Websocket)](#game-websocket)
 14. [Game pub/sub for auto-scaling](#game-pubsub-for-auto-scaling)
 
@@ -147,13 +147,13 @@ The application underwent stress testing using K6 to simulate real-world user in
 
 **PowerPoint generator**
 
-![**Intelligent Educational QA Assistant (High-level Architecture)**](images/image%206.png)
+![**Intelligent Educational Question Answering Assistant (High-level Architecture)**](images/image%206.png)
 
-**Intelligent Educational QA Assistant (High-level Architecture)**
+**Intelligent Educational Question Answering Assistant (High-level Architecture)**
 
-![**Intelligent Educational QA Assistant (Low-level Architecture)**](images/image%207.png)
+![**Intelligent Educational Question Answering Assistant (Low-level Architecture)**](images/image%207.png)
 
-**Intelligent Educational QA Assistant (Low-level Architecture)**
+**Intelligent Educational Question Answering Assistant (Low-level Architecture)**
 
 ![**ETL + Feature Engineering for Real-Time Data Serving**](images/image%208.png)
 
@@ -425,11 +425,11 @@ If any errors occur during the generation process, whether during code validatio
 - The **Notifier** service communicates with the teacher, sending real-time updates about the status of their request.
 - If the generation process is successful, the teacher is informed that the PowerPoint has been saved and is ready for download. If errors occur, detailed information about the failure is sent back to the teacher.
 
-# Intelligent Educational QA Assistant (High-level Architecture)
+# Intelligent Educational Question Answering Assistant (High-level Architecture)
 
 ![image.png](images/image%206.png)
 
-This architecture is designed to build a **Intelligent Educational QA Assistant** for the education domain, using a **Retrieval-Augmented Generation (RAG)** approach. The design integrates several advanced techniques, including **HyDE**, **CRAG**, and **Fusion RAG**, to enhance the system's ability to handle complex queries and provide accurate, domain-specific responses. Below is an explanation of the workflow and components involved in this architecture:
+This architecture is designed to build a **Intelligent Educational Question Answering Assistant** for the education domain, using a **Retrieval-Augmented Generation (RAG)** approach. The design integrates several advanced techniques, including **HyDE**, **CRAG**, and **Fusion RAG**, to enhance the system's ability to handle complex queries and provide accurate, domain-specific responses. Below is an explanation of the workflow and components involved in this architecture:
 
 ### 1. Query Handling and Expansion
 
@@ -468,7 +468,7 @@ This architecture is designed to build a **Intelligent Educational QA Assistant*
 - **Final Response**:
     - Once the necessary data is retrieved, and the system generates a complete and well-rounded answer, the final **Response** is sent back to the user. This response is accurate, domain-specific, and tailored to the educational context of the query.
 
-# Intelligent Educational QA Assistant (Low-level Architecture)
+# Intelligent Educational Question Answering Assistant (Low-level Architecture)
 
 ![image.png](images/image%207.png)
 
