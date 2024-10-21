@@ -326,12 +326,6 @@ Kubernetes' **Horizontal Pod Autoscaling (HPA)** is central to this architecture
 - The final step in the pipeline is **Continuous Delivery**, where the Kubernetes cluster ensures that the latest version of the application is deployed to production. By automating this process, the CI/CD pipeline ensures that any code committed to the repository that passes all tests and build stages is quickly and efficiently delivered to end users.
 - Continuous Delivery removes manual intervention, reduces human error, and accelerates the delivery of new features or fixes, improving the overall development velocity. This approach also encourages frequent small updates rather than large, risky releases.
 
-### Additional Benefits and Potential Enhancements:
-
-- **Security Scanning**: Security scanners such as **Trivy** or **Clair** could be added to the pipeline to ensure that the Docker image does not contain vulnerabilities or outdated dependencies. This would ensure that every image pushed to Docker Hub is secure and compliant with best practices.
-- **Canary Releases or Blue-Green Deployment**: Kubernetes can be further enhanced by implementing advanced deployment strategies like **canary releases** or **blue-green deployments** to gradually roll out new versions of the application, ensuring that if any issue arises, it can be quickly rolled back without affecting all users.
-- **Infrastructure as Code (IaC)**: To manage the infrastructure provisioning for Kubernetes and Azure services, **Infrastructure as Code** tools such as **Terraform** or **Pulumi** could be integrated into the CI/CD pipeline. This would ensure that the infrastructure itself is version-controlled and can be automatically provisioned alongside application deployments.
-
 # Traditional HTTP Request Workflow (CRUD Operations)
 
 ![image.png](images/image%203.png)
