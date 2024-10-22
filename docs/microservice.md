@@ -1,0 +1,47 @@
+# Micro-services architecture
+
+![image.png](../images/image%2011.png)
+
+- **API Gateway Service**:
+    - Centralized entry point for all client interactions (mobile, web).
+    - Handles authentication, rate limiting, and routing.
+    - Alternatives: **Backend for Frontend (BFF)** or direct microservice communication.
+- **RabbitMQ**:
+    - Message broker enabling asynchronous communication between services.
+    - Simplifies task management and service decoupling.
+    - Alternatives: **Apache Kafka** for high-throughput, event-driven architectures.
+- **Job Handler Service**:
+    - Manages background tasks like file processing and quiz generation.
+    - Prevents these tasks from blocking other services.
+    - Alternatives: Serverless architectures like **AWS Lambda** for reduced management overhead.
+- **File System (Stage Area & Main Area)**:
+    - Handles temporary and permanent file storage.
+    - Alternatives: **Cloud-based storage** (AWS S3, Azure Blob) for better scalability.
+- **Cache**:
+    - Speeds up frequently accessed data, improving performance.
+    - Alternatives: **Redis** or **Memcached**, with Redis offering advanced features like persistence.
+- **Quiz Service**:
+    - Facilitates AI-generated quizzes for student assessments.
+    - Could be split into smaller microservices as complexity increases.
+- **Assignment Service**:
+    - Handles assignment submissions, grading, and issue extraction via AI.
+    - Can scale by dividing into more specialized microservices.
+- **Chat Service**:
+    - Real-time support with web searches and file processing.
+    - Alternatives: WebSocket-based solutions (SignalR) for enhanced real-time communication.
+- **Vector Database**:
+    - Stores AI embeddings and vectorized data for personalized learning.
+    - Alternatives: **Pinecone**, **FAISS** for scalable similarity search.
+- **Relational Database with Replicas**:
+    - Provides high availability, consistency, and fault tolerance for data storage.
+    - Alternatives: **NoSQL databases** (MongoDB) or **distributed databases** (CockroachDB) for unstructured data needs.
+- **API Gateway Pattern**:
+    - Simplifies service interaction, security, and routing.
+    - Alternatives: **Saga Pattern** for managing distributed transactions or **Event-Driven Architecture** for real-time service updates.
+- **RabbitMQ vs Kafka**:
+    - RabbitMQ: Suitable for task queues, low-latency message routing.
+    - Kafka: Better for high-throughput, real-time event streaming and logging.
+- **Potential Improvements**:
+    - Use **serverless** for tasks (e.g., Job Handler).
+    - Adopt **CQRS** or **event sourcing** for scalability and performance.
+    - Implement **service mesh** (Istio/Linkerd) for better communication management and observability between services.
