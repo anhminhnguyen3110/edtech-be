@@ -14,17 +14,16 @@ You can find the front-end repository here: [Edtech Front-end Repository](https:
    - [DevOps](#devops)
    - [Testing](#testing)
 3. [Performance Testing](#performance-testing)
-4. [All Diagrams](#all-diagrams)
-5. [Micro-services architecture](#micro-services-architecture)
-6. [Deployment architecture](#deployment-architecture)
-7. [CI/CD pipeline](#cicd-pipeline)
-8. [Traditional HTTP Request Workflow (CRUD Operations)](#traditional-http-request-workflow-crud-operations)
-9. [Downstream Task Workflow (Time-Consuming Operations)](#downstream-task-workflow-time-consuming-operations)
-10. [PowerPoint Generator Architecture](#powerpoint-generator)
-11. [Intelligent Educational Question Answering Assistant (High-level Architecture)](#intelligent-educational-question-answering-assistant-high-level-architecture)
-12. [Intelligent Educational Question Answering Assistant (Low-level Architecture)](#intelligent-educational-question-answering-assistant-low-level-architecture)
-13. [Game (Websocket)](#game-websocket)
-14. [Game pub/sub for auto-scaling](#game-pubsub-for-auto-scaling)
+4. [Micro-services architecture](#micro-services-architecture)
+5. [Deployment architecture](#deployment-architecture)
+6. [CI/CD pipeline](#cicd-pipeline)
+7. [Traditional HTTP Request Workflow (CRUD Operations)](#traditional-http-request-workflow-crud-operations)
+8. [Downstream Task Workflow (Time-Consuming Operations)](#downstream-task-workflow-time-consuming-operations)
+9. [PowerPoint Generator Architecture](#powerpoint-generator)
+10. [Intelligent Educational Question Answering Assistant (High-level Architecture)](#intelligent-educational-question-answering-assistant-high-level-architecture)
+11. [Intelligent Educational Question Answering Assistant (Low-level Architecture)](#intelligent-educational-question-answering-assistant-low-level-architecture)
+12. [Game (Websocket)](#game-websocket)
+13. [Game pub/sub for auto-scaling](#game-pubsub-for-auto-scaling)
 
 
 # Application Introduction
@@ -121,83 +120,36 @@ The application underwent stress testing using K6 to simulate real-world user in
 
 ![fail.png](images/failure.png)
 
-
-# All Diagrams
-
-![**Back-end Microservice Architecture**](images/image.png)
-
-**Back-end Microservice Architecture**
-
-![**Kubernetes Deployment Architecture**](images/image%201.png)
-
-**Kubernetes Deployment Architecture**
-
-![**CI/CD pipeline for auto deployment and integration**](images/image%202.png)
-
-**CI/CD pipeline for auto deployment and integration**
-
-![**Traditional HTTP Request Workflow (CRUD Operations)**](images/image%203.png)
-
-**Traditional HTTP Request Workflow (CRUD Operations)**
-
-![**Downstream Task Workflow (Time-Consuming Operations)**](images/image%204.png)
-
-**Downstream Task Workflow (Time-Consuming Operations)**
-
-![**PowerPoint generator**](images/image%205.png)
-
-**PowerPoint generator**
-
-![**Intelligent Educational Question Answering Assistant (High-level Architecture)**](images/image%206.png)
-
-**Intelligent Educational Question Answering Assistant (High-level Architecture)**
-
-![**Intelligent Educational Question Answering Assistant (Low-level Architecture)**](images/image%207.png)
-
-**Intelligent Educational Question Answering Assistant (Low-level Architecture)**
-
-![**ETL + Feature Engineering for Real-Time Data Serving**](images/image%208.png)
-
-**ETL + Feature Engineering for Real-Time Data Serving**
-
-![**Game (Websocket)**](images/image%209.png)
-
-**Game (Websocket)**
-
-![**Game pub/sub for auto-scaling**](images/image%2010.png)
-
-**Game pub/sub for auto-scaling**
-
 # Micro-services architecture
 
 ![image.png](images/image%2011.png)
-For more details, see [here](docs/microservice.md).
+For more detailed explanations, see [here](docs/microservice.md).
 
 # Deployment Architecture
 
 ![image.png](images/image%2012.png)
-For more details, see [here](docs/deployment.md).
+For more detailed explanations, see [here](docs/deployment.md).
 
 # CI/CD pipeline
 
 ![image.png](images/image%202.png)
-For more details, see [here](docs/ci_cd.md).
+For more detailed explanations, see [here](docs/ci_cd.md).
 
 
 # Traditional HTTP Request Workflow (CRUD Operations)
 
 ![image.png](images/image%203.png)
-For more details, see [here](docs/http_workflow.md).
+For more detailed explanations, see [here](docs/http_workflow.md).
 
 # Downstream Task Workflow (Time-Consuming Operations)
 
 ![image.png](images/image%204.png)
-For more details, see [here](docs/downstream_workflow.md).
+For more detailed explanations, see [here](docs/downstream_workflow.md).
 
 # PowerPoint generator
 
 ![image.png](images/image%205.png)
-For more details, see [here](docs/powerpoint.md).
+For more detailed explanations, see [here](docs/powerpoint.md).
 
 # Intelligent Educational Question Answering Assistant (High-level Architecture)
 
@@ -205,7 +157,7 @@ For more details, see [here](docs/powerpoint.md).
 
 This architecture is designed to build a **Intelligent Educational Question Answering Assistant** for the education domain, using a **Retrieval-Augmented Generation (RAG)** approach. The design integrates several advanced techniques, including **HyDE**, **CRAG**, and **Fusion RAG**, to enhance the system's ability to handle complex queries and provide accurate, domain-specific responses. Below is an explanation of the workflow and components involved in this architecture:
 
-For more details, see [here](docs/qa_high.md).
+For more detailed explanations, see [here](docs/qa_high.md).
 
 # Intelligent Educational Question Answering Assistant (Low-level Architecture)
 
@@ -213,7 +165,7 @@ For more details, see [here](docs/qa_high.md).
 
 The low-level architecture described focuses on an **ETL (Extract, Transform, Load)** process, **Real-time Data Serving**, and a **RAG (Retrieval-Augmented Generation) Pipeline**. The system is designed to gather and process data from educational websites, ingest user-provided documents (such as PDFs), and integrate these inputs into a retrieval-augmented response system using advanced models like Large Language Models (LLMs) and query expansion techniques. Below is a breakdown of the major components and how they work together.
 
-For more details, see [here](docs/qa_low.md).
+For more detailed explanations, see [here](docs/qa_low.md).
 
 
 # Game (websocket)
@@ -222,11 +174,12 @@ For more details, see [here](docs/qa_low.md).
 
 This architecture represents a scalable system designed to handle multiplayer game sessions involving teachers and students, where real-time communication is facilitated through **WebSockets**. The system is distributed across multiple servers, with **Redis** acting as the central communication bridge to synchronize sessions across different nodes. Below is a detailed breakdown of how the architecture works.
 
-For more details, see [here](docs/game.md).
+For more detailed explanations, see [here](docs/game.md).
 
 # Game pub/sub for auto-scaling
 
 ![image.png](images/image%2010.png)
 
-For more details, see [here](docs/game_pub.md).
+This architecture represents a scalable system designed to handle multiplayer game sessions involving teachers and students, where real-time communication is facilitated through **WebSockets**. The system is distributed across multiple servers, with **Redis** acting as the central communication bridge to synchronize sessions across different nodes and using **Pub/Sub** pattern for auto-scaling. Below is a detailed breakdown of how the architecture works.
 
+For more detailed explanations, see [here](docs/game_pub.md).
