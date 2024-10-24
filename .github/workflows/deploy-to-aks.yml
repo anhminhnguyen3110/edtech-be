@@ -94,13 +94,14 @@ jobs:
         wait_dirs=("k8s/api" "k8s/assignment" "k8s/background-job" "k8s/chat" "k8s/quiz")
 
         for dir in "${wait_dirs[@]}"; do
-          kubectl delete -f $dir/deployment.yaml -n edtech-assistant-namespace
+          if kubectl get deployment -n edtech-assistant-namespace -o name | grep -q "$(basename $dir)"; then
+            kubectl delete -f $dir/deployment.yaml -n edtech-assistant-namespace
+          fi
         done
 
         # Wait for 1 minute before deploying the next set of services
         echo "Waiting for 1 minute before deploying the next set of services..."
         sleep 60
-
 
         # Deploy services
         for dir in "${wait_dirs[@]}"; do
