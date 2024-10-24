@@ -127,6 +127,7 @@ For more detailed explanations, see [here](docs/microservice.md).
 
 # Deployment Architecture
 
+![image 1](https://github.com/user-attachments/assets/a6c93c1e-7827-4721-b713-885645d54207)
 For more detailed explanations, see [here](docs/deployment.md).
 
 # CI/CD pipeline
