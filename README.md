@@ -127,7 +127,6 @@ For more detailed explanations, see [here](docs/microservice.md).
 
 # Deployment Architecture
 
-![image.png](images/image%2012.png)
 For more detailed explanations, see [here](docs/deployment.md).
 
 # CI/CD pipeline
