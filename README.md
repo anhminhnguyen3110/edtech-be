@@ -1,4 +1,3 @@
-
 # Edtech-BE (Microservices System For Edtech Assistant)
 You can access the web site from here: [Edtech Website](https://www.edtech-assistant.sbs/). 
 
